@@ -40,3 +40,50 @@ end
 get '/' do
   'Api Initialized...'
 end
+
+post '/label/refer/:label/:token' do
+  respond_to_commits do |commit|
+    GitHub.nonclosing_issues(commit["message"]) do |issue|
+      github.label_issue issue, params[:label]
+    end
+  end
+end
+
+post '/label/closed/:label/:token' do
+  respond_to_commits do |commit|
+    GitHub.closed_issues(commit["message"]) do |issue|
+      github.label_issue issue, params[:label]
+    end
+  end
+end
+
+post '/label/remove/closed/:label/:token' do
+  respond_to_commits do |commit|
+    GitHub.closed_issues(commit["message"]) do |issue|
+      github.remove_issue_label issue, params[:label]
+    end
+  end
+end
+
+post '/reopen/:token' do
+  respond_to_commits do |commit|
+    GitHub.closed_issues(commit["message"]) do |issue|
+      github.reopen_issue issue
+    end
+  end
+end
+
+post '/comment/:token' do
+  respond_to_commits do |commit|
+    comment = <<EOM
+Referenced by #{commit["id"]}
+
+#{commit["message"]}
+
+_Added by ghpong_
+EOM
+    GitHub.nonclosing_issues(commit["message"]) do |issue|
+      github.comment_issue issue, comment
+    end
+  end
+end
