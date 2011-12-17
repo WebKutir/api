@@ -2,5 +2,5 @@
   require 'sinatra'
   
   get '/' do
-    'Hello world!'
+    'Api Initialized...'
   end
