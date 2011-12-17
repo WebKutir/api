@@ -80,7 +80,7 @@ Referenced by #{commit["id"]}
 
 #{commit["message"]}
 
-_Added by ghpong_
+_Added by Automation_
 EOM
     GitHub.nonclosing_issues(commit["message"]) do |issue|
       github.comment_issue issue, comment
