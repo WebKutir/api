@@ -78,7 +78,7 @@ post '/comment/:token' do
     comment = <<EOM
 Referenced by #{commit["id"]}
 
-#{commit["message"]}
+#{commit["message"]} 
 
 _Added by Automation_
 EOM
