@@ -1,6 +1,6 @@
 # app.rb
 require 'sinatra'
-require 'github'
+require './github'
   
   get '/' do
     'Api Initialized...'
