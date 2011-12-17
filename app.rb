@@ -1,6 +1,9 @@
 # app.rb
 require 'sinatra'
-require './github'
+require 'net/http'
+require 'net/https'
+require 'json'
+require 'github'
   
   get '/' do
     'Api Initialized...'
